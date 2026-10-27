@@ -7,25 +7,34 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 USER_AGENT_REAL = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 
-# --- FUNCIONES DE EXTRACCIÓN ---
+# Configuración del navegador optimizada para Xvfb en GitHub Actions
+LAUNCH_ARGS = {
+    "headless": False,
+    "args": ["--window-position=-2000,-2000", "--no-sandbox", "--disable-dev-shm-usage"]
+}
+TIMEOUT_MS = 30000
+
+# =============================================================
+# FUNCIONES DE EXTRACCIÓN POR COMERCIALIZADORA
+# =============================================================
 
 def extraer_iberdrola(p):
     logging.info("Extrayendo Iberdrola...")
     tarifas = []
     
-    # 1. Tarifa Fija (Plan Online)
+    # 1. Tarifa Fija (Plan Online 24h)
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         contexto = navegador.new_context(user_agent=USER_AGENT_REAL)
         pagina = contexto.new_page()
-        pagina.goto("https://www.iberdrola.es/luz/tarifas/plan-online", wait_until="domcontentloaded", timeout=30000)
+        pagina.goto("https://www.iberdrola.es/luz/tarifas/plan-online", wait_until="domcontentloaded", timeout=TIMEOUT_MS)
 
         try:
             pagina.click("#onetrust-accept-btn-handler", timeout=3000)
         except Exception:
             pass
 
-        pagina.wait_for_selector("#detalle", timeout=15000)
+        pagina.wait_for_selector("#detalle", timeout=TIMEOUT_MS)
         pagina.wait_for_timeout(1000)
 
         nombre = "Plan Online 24h"
@@ -44,17 +53,17 @@ def extraer_iberdrola(p):
 
     # 2. Tarifa Por Periodos (Plan Online 3 Periodos)
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         contexto = navegador.new_context(user_agent=USER_AGENT_REAL)
         pagina = contexto.new_page()
-        pagina.goto("https://www.iberdrola.es/luz/tarifas/plan-online-tres-periodos", wait_until="domcontentloaded", timeout=30000)
+        pagina.goto("https://www.iberdrola.es/luz/tarifas/plan-online-tres-periodos", wait_until="domcontentloaded", timeout=TIMEOUT_MS)
 
         try:
             pagina.click("#onetrust-accept-btn-handler", timeout=3000)
         except Exception:
             pass
 
-        pagina.wait_for_selector("#detalle", timeout=15000)
+        pagina.wait_for_selector("#detalle", timeout=TIMEOUT_MS)
         pagina.wait_for_timeout(1000)
 
         nombre = "Plan Online 3 Periodos"
@@ -81,10 +90,10 @@ def extraer_octopus(p):
     tarifas = []
     
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://octopusenergy.es/precios", timeout=30000)
-        pagina.wait_for_selector("#relax", timeout=15000)
+        pagina.goto("https://octopusenergy.es/precios", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector("#relax", timeout=TIMEOUT_MS)
 
         # Fija
         nombre_fija = pagina.locator("#relax h2").first.text_content().strip()
@@ -99,7 +108,7 @@ def extraer_octopus(p):
         })
 
         # Periodos
-        pagina.wait_for_selector("#tres", timeout=15000)
+        pagina.wait_for_selector("#tres", timeout=TIMEOUT_MS)
         nombre_tramos = pagina.locator("#tres h2").first.text_content().strip()
         e_punta = float(pagina.locator("#tres .gpHZqY.dygHVk.wVEDp").filter(has_text="Energía").locator(".zyUhF.dewUnf.dDWCpe.jdmOZf.cMGtQw.fPSBzf.ZWNVL.gTvoMs").filter(has_text="Punta").locator(".cxYASs.gGbuRL.cSazNk.dqeDyC").first.text_content().strip().split()[0].replace(",","."))
         e_llano = float(pagina.locator("#tres .gpHZqY.dygHVk.wVEDp").filter(has_text="Energía").locator(".zyUhF.dewUnf.dDWCpe.jdmOZf.cMGtQw.fPSBzf.ZWNVL.gTvoMs").filter(has_text="Llano").locator(".cxYASs.gGbuRL.cSazNk.dqeDyC").first.text_content().strip().split()[0].replace(",","."))
@@ -125,10 +134,10 @@ def extraer_energiavm(p):
     
     # 1. Fija 24h
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.energyavm.es/luz/formula-fija-24-horas-luz/", timeout=30000)
-        pagina.wait_for_selector("#selected-product", timeout=15000)
+        pagina.goto("https://www.energyavm.es/luz/formula-fija-24-horas-luz/", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector("#selected-product", timeout=TIMEOUT_MS)
 
         nombre = pagina.locator("#selected-product .header .name-product").first.text_content().strip()
         e_24h = float(pagina.locator("#selected-product .info-product .prices").filter(has_text="energía").locator(".price_prodcut_vm").first.text_content().strip().replace(",","."))
@@ -146,10 +155,10 @@ def extraer_energiavm(p):
 
     # 2. Periodos
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.energyavm.es/luz/formula-fija-3-periodos-luz/", timeout=30000)
-        pagina.wait_for_selector("#selected-product", timeout=15000)
+        pagina.goto("https://www.energyavm.es/luz/formula-fija-3-periodos-luz/", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector("#selected-product", timeout=TIMEOUT_MS)
 
         nombre = pagina.locator("#selected-product .header .name-product").first.text_content().strip()
         e_punta = float(pagina.locator("#selected-product .prices").filter(has_text="energía").locator(".price_prodcut_vm").nth(0).text_content().strip().replace(",","."))
@@ -176,10 +185,10 @@ def extraer_visalia(p):
     
     # 1. Fija
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://visalia.es/luz/fijo24horas/", timeout=30000)
-        pagina.wait_for_selector("#page-content .vts-tabla", timeout=15000)
+        pagina.goto("https://visalia.es/luz/fijo24horas/", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector("#page-content .vts-tabla", timeout=TIMEOUT_MS)
 
         nombre = pagina.locator(".g-breadcrumbs-item").nth(2).text_content().strip()
         e_24h = float(pagina.locator(".energia_principal").first.text_content().strip().split()[0].replace(",","."))
@@ -197,10 +206,10 @@ def extraer_visalia(p):
 
     # 2. Periodos
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://visalia.es/luz/luz-3-periodos/", timeout=30000)
-        pagina.wait_for_selector("#page-content .vts-tabla", timeout=15000)
+        pagina.goto("https://visalia.es/luz/luz-3-periodos/", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector("#page-content .vts-tabla", timeout=TIMEOUT_MS)
 
         nombre = pagina.locator(".g-breadcrumbs-item").nth(2).text_content().strip()
         e_punta = float(pagina.locator(".tarifa_3_periodos_energia_p1").first.text_content().strip().split()[0].replace(",","."))
@@ -227,10 +236,10 @@ def extraer_nufri(p):
 
     # 1. Fija Sin Horarios
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.energianufri.com/es/tarifas-luz", timeout=30000)
-        pagina.wait_for_selector(".bg-background-primary", timeout=15000)
+        pagina.goto("https://www.energianufri.com/es/tarifas-luz", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector(".bg-background-primary", timeout=TIMEOUT_MS)
 
         pagina.locator('[data-slot="card"]').filter(has_text="Sin horarios").filter(has_not_text="Universal").locator('[data-slot="sheet-trigger"]').click()
         pagina.wait_for_selector(".mt-8 .text-text-primary-dark", timeout=10000)
@@ -251,10 +260,10 @@ def extraer_nufri(p):
 
     # 2. Universal Sin Horarios
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.energianufri.com/es/tarifas-luz", timeout=30000)
-        pagina.wait_for_selector(".bg-background-primary", timeout=15000)
+        pagina.goto("https://www.energianufri.com/es/tarifas-luz", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector(".bg-background-primary", timeout=TIMEOUT_MS)
 
         pagina.locator('[data-slot="card"]').filter(has_text="Universal sin horarios").locator('[data-slot="sheet-trigger"]').click()
         pagina.wait_for_selector(".mt-8 .text-text-primary-dark", timeout=10000)
@@ -275,10 +284,10 @@ def extraer_nufri(p):
 
     # 3. Con Horarios (Periodos)
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.energianufri.com/es/tarifas-luz", timeout=30000)
-        pagina.wait_for_selector(".bg-background-primary", timeout=15000)
+        pagina.goto("https://www.energianufri.com/es/tarifas-luz", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector(".bg-background-primary", timeout=TIMEOUT_MS)
 
         pagina.locator('[data-slot="card"]').filter(has_text="Con horarios").filter(has_not_text="Universal").locator('[data-slot="sheet-trigger"]').click()
         pagina.wait_for_selector(".mt-8 .text-text-primary-dark", timeout=10000)
@@ -301,10 +310,10 @@ def extraer_nufri(p):
 
     # 4. Universal Con Horarios (Periodos)
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.energianufri.com/es/tarifas-luz", timeout=30000)
-        pagina.wait_for_selector(".bg-background-primary", timeout=15000)
+        pagina.goto("https://www.energianufri.com/es/tarifas-luz", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector(".bg-background-primary", timeout=TIMEOUT_MS)
 
         pagina.locator('[data-slot="card"]').filter(has_text="Universal con horarios").locator('[data-slot="sheet-trigger"]').click()
         pagina.wait_for_selector(".mt-8 .text-text-primary-dark", timeout=10000)
@@ -334,10 +343,10 @@ def extraer_totalenergies(p):
     
     # 1. Fija (A tu aire siempre)
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.totalenergies.es/es/hogares/tarifas-luz/a-tu-aire-siempre", timeout=30000)
-        pagina.wait_for_selector("#bloque-redisenio-toogle-siempre", timeout=15000)
+        pagina.goto("https://www.totalenergies.es/es/hogares/tarifas-luz/a-tu-aire-siempre", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector("#bloque-redisenio-toogle-siempre", timeout=TIMEOUT_MS)
 
         nombre = pagina.locator("#block-total-redesign-breadcrumbs .breadcrumb__item").nth(2).text_content().strip()
         e_24h = float(pagina.locator("#bloque-redisenio-toogle-siempre .precios--toogle-region-content .precios--lista .main-content").first.text_content().strip().split()[0].replace(",","."))
@@ -355,10 +364,10 @@ def extraer_totalenergies(p):
 
     # 2. Periodos (Programa Tu Ahorro)
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.totalenergies.es/es/hogares/tarifas-luz/a-tu-aire-programa-tu-ahorro", timeout=30000)
-        pagina.wait_for_selector("#organiza-consumo", timeout=15000)
+        pagina.goto("https://www.totalenergies.es/es/hogares/tarifas-luz/a-tu-aire-programa-tu-ahorro", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector("#organiza-consumo", timeout=TIMEOUT_MS)
 
         nombre = pagina.locator("#block-total-redesign-breadcrumbs .breadcrumb__item").nth(2).text_content().strip()
         e_punta = float(pagina.locator("#organiza-consumo .precios--toogle-region-content .precios--lista .precios--toogle-item.alert .main-content").first.text_content().strip().split()[0].replace(",","."))
@@ -384,10 +393,10 @@ def extraer_holaluz(p):
     tarifas = []
     
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://www.holaluz.com/luz/tarifas-luz", timeout=30000)
-        pagina.wait_for_selector(".supply-rates-comparative-information", timeout=15000)
+        pagina.goto("https://www.holaluz.com/luz/tarifas-luz", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector(".supply-rates-comparative-information", timeout=TIMEOUT_MS)
 
         # Fija
         nombre_f = pagina.locator(".supply-rates-comparative-information .comparative-card").filter(has_text="Tarifa Clásica").locator(".ma-heading").first.text_content().strip()
@@ -427,10 +436,10 @@ def extraer_imagina_energia(p):
 
     # 1. Fija
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://imaginaenergia.com/tarifa-luz-sin-horas/", timeout=30000)
-        pagina.wait_for_selector(".elementor-element-55da3e40", timeout=15000)
+        pagina.goto("https://imaginaenergia.com/tarifa-luz-sin-horas/", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector(".elementor-element-55da3e40", timeout=TIMEOUT_MS)
 
         nombre = pagina.locator(".elementor-element-55da3e40 .elementor-element-ff95408 .elementor-heading-title").first.text_content().strip()
         e_24h = float(re.search(r"Ahora.*:\s*([\d,]+)", pagina.locator("h2.elementor-heading-title").filter(has_text="Ahora").text_content()).group(1).replace(",","."))
@@ -448,10 +457,10 @@ def extraer_imagina_energia(p):
 
     # 2. Periodos
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://imaginaenergia.com/tarifa-luz-noche-y-findes/", timeout=30000)
-        pagina.wait_for_selector(".elementor-element-26d9f53f", timeout=15000)
+        pagina.goto("https://imaginaenergia.com/tarifa-luz-noche-y-findes/", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector(".elementor-element-26d9f53f", timeout=TIMEOUT_MS)
 
         nombre = pagina.locator(".elementor-element-26d9f53f .elementor-element-4907f2e .elementor-heading-title").first.text_content().strip()
         e_punta = float(re.search(r"Punta:\s*([\d,]+)", pagina.locator(".elementor-element-25912732 h2.elementor-heading-title").filter(has_text="Energía").text_content()).group(1).replace(",","."))
@@ -477,10 +486,10 @@ def extraer_l_electra(p):
     tarifas = []
     
     try:
-        navegador = p.chromium.launch(headless=True)
+        navegador = p.chromium.launch(**LAUNCH_ARGS)
         pagina = navegador.new_page()
-        pagina.goto("https://electracaldenseenergia.com/es/luz/", timeout=30000)
-        pagina.wait_for_selector("#page-content .g-cols", timeout=15000)
+        pagina.goto("https://electracaldenseenergia.com/es/luz/", timeout=TIMEOUT_MS)
+        pagina.wait_for_selector("#page-content .g-cols", timeout=TIMEOUT_MS)
 
         # Fija
         nombre_f = pagina.locator("#page-content .wpb_column .price-wrapper").nth(0).locator("h5.w-text .w-text-value").first.text_content().strip()
@@ -514,7 +523,9 @@ def extraer_l_electra(p):
     return tarifas
 
 
-# --- ORQUESTADOR PRINCIPAL ---
+# =============================================================
+# ORQUESTADOR PRINCIPAL
+# =============================================================
 
 def actualizar_todas_las_tarifas_json(archivo_salida="tarifas_mercado.json"):
     todas_las_tarifas = []
