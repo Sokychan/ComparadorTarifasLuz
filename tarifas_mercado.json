@@ -1,0 +1,222 @@
+[
+  {
+    "Comercializadora": "Iberdrola",
+    "Nombre_Tarifa": "Plan Online 24h",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.119151,
+    "Potencia_P2": 0.078055,
+    "Precio_Energia_24h": 0.1499,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "Iberdrola",
+    "Nombre_Tarifa": "Plan Online 3 Periodos",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.091074,
+    "Potencia_P2": 0.013483,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.217,
+    "P2": 0.162,
+    "P3": 0.129
+  },
+  {
+    "Comercializadora": "Octopus Energy",
+    "Nombre_Tarifa": "Octopus Relax",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.12,
+    "Potencia_P2": 0.12,
+    "Precio_Energia_24h": 0.154,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "Octopus Energy",
+    "Nombre_Tarifa": "Octopus 3",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.12,
+    "Potencia_P2": 0.12,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.196,
+    "P2": 0.143,
+    "P3": 0.139
+  },
+  {
+    "Comercializadora": "EnergiaVM",
+    "Nombre_Tarifa": "24 horas Luz",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.093151,
+    "Potencia_P2": 0.093151,
+    "Precio_Energia_24h": 0.117,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "EnergiaVM",
+    "Nombre_Tarifa": "3 Periodos Luz",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.093151,
+    "Potencia_P2": 0.093151,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.169,
+    "P2": 0.129,
+    "P3": 0.099
+  },
+  {
+    "Comercializadora": "Visalia",
+    "Nombre_Tarifa": "Luz Fijo 24h",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.076712,
+    "Potencia_P2": 0.076712,
+    "Precio_Energia_24h": 0.144757,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "Visalia",
+    "Nombre_Tarifa": "Luz 3 Periodos",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.075903,
+    "Potencia_P2": 0.001987,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.260402,
+    "P2": 0.170417,
+    "P3": 0.142047
+  },
+  {
+    "Comercializadora": "Nufri",
+    "Nombre_Tarifa": "Sin horarios",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.084122,
+    "Potencia_P2": 0.084179,
+    "Precio_Energia_24h": 0.129326,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "Nufri",
+    "Nombre_Tarifa": "Universal sin horarios",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.075903,
+    "Potencia_P2": 0.048563,
+    "Precio_Energia_24h": 0.153467,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "Nufri",
+    "Nombre_Tarifa": "Con horarios",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.084122,
+    "Potencia_P2": 0.084179,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.197282,
+    "P2": 0.11851,
+    "P3": 0.08437
+  },
+  {
+    "Comercializadora": "Nufri",
+    "Nombre_Tarifa": "Universal con horarios",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.075903,
+    "Potencia_P2": 0.048563,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.221424,
+    "P2": 0.142652,
+    "P3": 0.108511
+  },
+  {
+    "Comercializadora": "TotalEnergies",
+    "Nombre_Tarifa": "A Tu Aire Siempre",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.094493,
+    "Potencia_P2": 0.094493,
+    "Precio_Energia_24h": 0.1199,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "TotalEnergies",
+    "Nombre_Tarifa": "A Tu Aire Programa Tu Ahorro",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.094493,
+    "Potencia_P2": 0.094493,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.183572,
+    "P2": 0.11393,
+    "P3": 0.086176
+  },
+  {
+    "Comercializadora": "Holaluz",
+    "Nombre_Tarifa": "Tarifa Clásica",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.12,
+    "Potencia_P2": 0.12,
+    "Precio_Energia_24h": 0.154,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "Holaluz",
+    "Nombre_Tarifa": "Tarifa 3",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.12,
+    "Potencia_P2": 0.12,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.248,
+    "P2": 0.17,
+    "P3": 0.146
+  },
+  {
+    "Comercializadora": "Imagina Energía",
+    "Nombre_Tarifa": "SIN HORAS",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.136,
+    "Potencia_P2": 0.086,
+    "Precio_Energia_24h": 0.119,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "Imagina Energía",
+    "Nombre_Tarifa": "NOCHE Y FINDES",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.121,
+    "Potencia_P2": 0.078,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.184,
+    "P2": 0.124,
+    "P3": 0.099
+  },
+  {
+    "Comercializadora": "L'Electra Energia",
+    "Nombre_Tarifa": "Plan fijo",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.086376,
+    "Potencia_P2": 0.003485,
+    "Precio_Energia_24h": 0.174056,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
+  },
+  {
+    "Comercializadora": "L'Electra Energia",
+    "Nombre_Tarifa": "Plan Flexa 3",
+    "Modalidad": "Tramos",
+    "Potencia_P1": 0.086376,
+    "Potencia_P2": 0.003485,
+    "Precio_Energia_24h": 0.0,
+    "P1": 0.238826,
+    "P2": 0.16786,
+    "P3": 0.138133
+  }
+]
