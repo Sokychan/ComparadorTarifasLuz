@@ -2,9 +2,11 @@ name: Actualización Automática de Tarifas de Luz
 
 on:
   schedule:
-    # Se ejecuta todos los lunes a las 06:00 UTC
     - cron: '0 6 * * 1'
-  workflow_dispatch: # Botón para ejecución manual en GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   actualizar:
@@ -19,14 +21,16 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar Playwright y dependencias
+      - name: Instalar Xvfb, Playwright y dependencias
         run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
           python -m pip install --upgrade pip
           pip install playwright
           playwright install chromium --with-deps
 
-      - name: Ejecutar Extractor de Tarifas de Luz
-        run: python ExtractorTarifas.py
+      - name: Ejecutar Extractor de Tarifas de Luz (con pantalla virtual Xvfb)
+        run: xvfb-run python ExtractorTarifas.py
 
       - name: Hacer Commit y Push del JSON
         run: |
