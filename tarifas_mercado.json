@@ -14,12 +14,12 @@
     "Comercializadora": "Iberdrola",
     "Nombre_Tarifa": "Plan Online 3 Periodos",
     "Modalidad": "Tramos",
-    "Potencia_P1": 0.119151,
-    "Potencia_P2": 0.078055,
+    "Potencia_P1": 0.091074,
+    "Potencia_P2": 0.013483,
     "Precio_Energia_24h": 0.0,
-    "P1": 0.186286,
-    "P2": 0.160702,
-    "P3": 0.14791
+    "P1": 0.217,
+    "P2": 0.162,
+    "P3": 0.129
   },
   {
     "Comercializadora": "Octopus Energy",
@@ -42,6 +42,17 @@
     "P1": 0.196,
     "P2": 0.143,
     "P3": 0.139
+  },
+  {
+    "Comercializadora": "EnergiaVM",
+    "Nombre_Tarifa": "24 horas Luz",
+    "Modalidad": "24h",
+    "Potencia_P1": 0.093151,
+    "Potencia_P2": 0.093151,
+    "Precio_Energia_24h": 0.117,
+    "P1": 0.0,
+    "P2": 0.0,
+    "P3": 0.0
   },
   {
     "Comercializadora": "EnergiaVM",
