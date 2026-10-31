@@ -91,9 +91,9 @@
     "Comercializadora": "Nufri",
     "Nombre_Tarifa": "Sin horarios",
     "Modalidad": "24h",
-    "Potencia_P1": 0.084122,
-    "Potencia_P2": 0.084179,
-    "Precio_Energia_24h": 0.129326,
+    "Potencia_P1": 0.088231,
+    "Potencia_P2": 0.088289,
+    "Precio_Energia_24h": 0.219332,
     "P1": 0.0,
     "P2": 0.0,
     "P3": 0.0
@@ -102,9 +102,9 @@
     "Comercializadora": "Nufri",
     "Nombre_Tarifa": "Universal sin horarios",
     "Modalidad": "24h",
-    "Potencia_P1": 0.075903,
-    "Potencia_P2": 0.048563,
-    "Precio_Energia_24h": 0.153467,
+    "Potencia_P1": 0.08373,
+    "Potencia_P2": 0.009815,
+    "Precio_Energia_24h": 0.265375,
     "P1": 0.0,
     "P2": 0.0,
     "P3": 0.0
@@ -113,23 +113,23 @@
     "Comercializadora": "Nufri",
     "Nombre_Tarifa": "Con horarios",
     "Modalidad": "Tramos",
-    "Potencia_P1": 0.084122,
-    "Potencia_P2": 0.084179,
+    "Potencia_P1": 0.088231,
+    "Potencia_P2": 0.088289,
     "Precio_Energia_24h": 0.0,
-    "P1": 0.197282,
-    "P2": 0.11851,
-    "P3": 0.08437
+    "P1": 0.300905,
+    "P2": 0.209114,
+    "P3": 0.163513
   },
   {
     "Comercializadora": "Nufri",
     "Nombre_Tarifa": "Universal con horarios",
     "Modalidad": "Tramos",
-    "Potencia_P1": 0.075903,
-    "Potencia_P2": 0.048563,
+    "Potencia_P1": 0.08373,
+    "Potencia_P2": 0.009815,
     "Precio_Energia_24h": 0.0,
-    "P1": 0.221424,
-    "P2": 0.142652,
-    "P3": 0.108511
+    "P1": 0.346949,
+    "P2": 0.255157,
+    "P3": 0.209556
   },
   {
     "Comercializadora": "TotalEnergies",
@@ -159,7 +159,7 @@
     "Modalidad": "24h",
     "Potencia_P1": 0.12,
     "Potencia_P2": 0.12,
-    "Precio_Energia_24h": 0.154,
+    "Precio_Energia_24h": 0.159,
     "P1": 0.0,
     "P2": 0.0,
     "P3": 0.0
@@ -172,8 +172,8 @@
     "Potencia_P2": 0.12,
     "Precio_Energia_24h": 0.0,
     "P1": 0.248,
-    "P2": 0.17,
-    "P3": 0.146
+    "P2": 0.175,
+    "P3": 0.149
   },
   {
     "Comercializadora": "Imagina Energía",
